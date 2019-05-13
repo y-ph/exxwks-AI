@@ -12,7 +12,7 @@ function showPicked(input) {
 }
 
 function clearAlert() {
-	$("#alert").addClass("d-none")
+	$("#alert").addClass("d-none");
 }
 
 function showAlert(message) {
@@ -30,15 +30,15 @@ function hideLoading() {
 }
 
 function clearProgress() {
-	setProgressValue($("#first"), "unknown", 0)
-	setProgressValue($("#second"), "unknown", 0)
-	setProgressValue($("#third"), "unknown", 0)
+	setProgressValue($("#first"), "unknown", 0);
+	setProgressValue($("#second"), "unknown", 0);
+	setProgressValue($("#third"), "unknown", 0);
 }
 
 function setProgressValue(progressElement, predictedClass, predictionValue) {
-	value = Math.round(predictionValue*100)
-	progressElement.css("width", value+"%").attr("aria-valuenow", value);
-	progressElement.html(predictedClass + " (" + value + "%)")
+	value = Math.round(predictionValue*100);
+	progressElement.find("div").css("width", value+"%").attr("aria-valuenow", value);
+	progressElement.find("span").html(predictedClass + " (" + value + "%)");
 }
 
 function analyze() {
@@ -52,14 +52,14 @@ function analyze() {
 
     displayLoading();
     var xhr = new XMLHttpRequest();
-    var loc = window.location
+    var loc = window.location;
 	
 	if (loc.protocol=="file:") {
 		showAlert("Can not analyze locally :-(");
-		setTimeout(hideLoading, 2000);
-		setProgressValue($("#first"), "Some Class", 0.98)
-		setProgressValue($("#second"), "Other Class", 0.08)
-		setProgressValue($("#third"), "Any Class", 0.01)
+		setTimeout(hideLoading, 1000);
+		setProgressValue($("#first"), "Some Class", 0.98);
+		setProgressValue($("#second"), "Other Class", 0.08);
+		setProgressValue($("#third"), "Any Class", 0.01);
 	} else {
 		xhr.open("POST", `${loc.protocol}//${loc.hostname}:${loc.port}/analyze`, true);
 		xhr.timeout = 5000; // timeout in ms
@@ -75,9 +75,9 @@ function analyze() {
 			if (this.readyState === 4) {
 				if (this.status === 200) {
 					var response = JSON.parse(e.target.responseText);
-					setProgressValue($("#first"), response['scores'][0][0], response['scores'][0][1])
-					setProgressValue($("#second"), response['scores'][1][0], response['scores'][1][1])
-					if(response['scores'].length > 2) setProgressValue($("#third"), response['scores'][2][0], response['scores'][2][1])
+					setProgressValue($("#first"), response['scores'][0][0], response['scores'][0][1]);
+					setProgressValue($("#second"), response['scores'][1][0], response['scores'][1][1]);
+					if(response['scores'].length > 2) setProgressValue($("#third"), response['scores'][2][0], response['scores'][2][1]);
 				} else {
 					showAlert(`Request failed: ${this.statusText}`);
 				}
