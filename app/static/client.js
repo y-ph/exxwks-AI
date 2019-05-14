@@ -4,6 +4,7 @@ function showPicked(input) {
     var reader = new FileReader();
     reader.onload = function (e) {
 		$("#image-picked").attr("src", e.target.result);
+		$("#file-label").html(input.files[0].name);
 		$("#image-picked").removeClass("d-none");
 		clearProgress();
 		clearAlert();
@@ -30,9 +31,9 @@ function hideLoading() {
 }
 
 function clearProgress() {
-	setProgressValue($("#first"), "unknown", 0);
-	setProgressValue($("#second"), "unknown", 0);
-	setProgressValue($("#third"), "unknown", 0);
+	setProgressValue($("#first"), "N/A", 0);
+	setProgressValue($("#second"), "N/A", 0);
+	setProgressValue($("#third"), "N/A", 0);
 }
 
 function setProgressValue(progressElement, predictedClass, predictionValue) {
