@@ -7,3 +7,6 @@
 * Start server: `python app/server.py serve`
 * Browse app using http://nn.nn.nn.nn:8088 (get external IP using `gcloud compute instances list`)
 * Customize the app to your liking
+  * server.py contains the server side application code (python)
+  * static/client.js contains the client side application code (JavaScript)
+  * view/index.html contains the client side view (HTML, Bootstrap)
